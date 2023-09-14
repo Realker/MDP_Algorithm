@@ -6,7 +6,7 @@ public class Sensor {
     int map_width = 20;
     int map_height = 20;
 
-    boolean check_hit_wall;
+    boolean check_hit_obstacle;
 
     int[] sensor_XY = new int[2];
     HashMap<int[], int[]> left_coordinates;
@@ -29,7 +29,7 @@ public class Sensor {
 		this.robot_locationY = robot_locationY;
 		this.robot_X = robot_X;
 		this.robot_Y = robot_Y;
-		this.check_hit_wall = false;
+		this.check_hit_obstacle = false;
 		this.sense_range = sense_range;
 		this.curr_direction = curr_direction;
 	}
@@ -193,7 +193,7 @@ public class Sensor {
 
 	// make robot sense the location
 	public boolean sense_location(Map map, int x, int y, int robot_distance) {
-		boolean hit_wall = false;
+		boolean hit_obstacle = false;
 
 		int score = 0;
 
@@ -221,13 +221,13 @@ public class Sensor {
 			if (map.grid_map[y][x] == ExplorationTypes.convert_type_to_int("OBSTACLE")
 					|| map.grid_map[y][x] == ExplorationTypes.convert_type_to_int("NOT_OBSTACLE")) {
 				score = -score;
-				hit_wall = true;
+				hit_obstacle = true;
 			}
 			map.set_score(x, y, score);
 		} else
-			hit_wall = true;
+			hit_obstacle = true;
 
-		return hit_wall;
+		return hit_obstacle;
 	}
 
 	public boolean Sense(Map map, int data, int[][] not_working) {
@@ -235,8 +235,8 @@ public class Sensor {
 		int new_X = 0;
 		int new_Y = 0;
 
-		// is true after robot hits a wall, to prevent further sensing
-		boolean hit_wall = false;
+		// is true after robot hits an obstacle, to prevent further sensing
+		boolean hit_obstacle = false;
 		boolean wall_hit_extra = false;
 
 		for (int i = 1; i < sense_range + 1; i++) {
@@ -255,10 +255,10 @@ public class Sensor {
 				new_Y = robot_Y + robot_locationY + i;
 			}
 
-			// hit_wall will be true when sense_location returns a true
-			// that indicates a wall has been encountered
-			if (!hit_wall) {
-				hit_wall = sense_location(map, new_X, new_Y, i);
+			// hit_obstacle will be true when sense_location returns a true
+			// that indicates an obstacle has been encountered
+			if (!hit_obstacle) {
+				hit_obstacle = sense_location(map, new_X, new_Y, i);
 				if (sense_location(map, new_X, new_Y, 0) && i == 1)
 					wall_hit_extra = true;
 			} else
