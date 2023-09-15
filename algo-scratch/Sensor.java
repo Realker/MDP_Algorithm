@@ -262,7 +262,7 @@ public class Sensor {
 				if (sense_location(map, new_X, new_Y, 0) && i == 1)
 					obstacle_hit_extra = true;
 			} else
-				// send a 0 to signify that this is behind a wall
+				// send a 0 to signify that this is behind an obstacle
 				sense_location(map, new_X, new_Y, 0);
 		}
 
