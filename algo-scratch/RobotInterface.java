@@ -433,7 +433,7 @@ public abstract class RobotInterface {
 		graphics.setColor(Color.RED);
 		x_g = 10 + (x - 1) * Map.size_of_square;
 		y_g = 10 + (y - 1) * Map.size_of_square;
-		graphics.fillRect(x_g, y_g, 30, 30); //fill rect
+		graphics.fillRect(x_g, y_g, length, length); //fill rect
 
 		graphics.setColor(Color.BLUE);
 
@@ -449,7 +449,7 @@ public abstract class RobotInterface {
 		else if (face_dir == Facing.RIGHT)
 			dir_offsetX = 38;
 
-		graphics.fillRect(x_g + 30 + dir_offsetX, y_g + 30 + dir_offsetY, 30, 30);
+		graphics.fillRect(x_g + 30 + dir_offsetX, y_g + 30 + dir_offsetY, length, length);
 	}
 
 	public abstract boolean retrieve_reset_wanted();
