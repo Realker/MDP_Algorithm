@@ -11,8 +11,8 @@ public abstract class RobotInterface {
     //coordinates to draw the robot
     int x_g, y_g;
 
-    //radius of circle to draw the robot
-    final static int radius = 90;
+    //length to draw robot (30 by 30)
+    final static int length = 30;
 
     //direction of the robot
     Facing face_dir;
@@ -39,7 +39,7 @@ public abstract class RobotInterface {
 
     public abstract void sense_robot_location();
 
-	public abstract void move_robot();
+    public abstract void move_robot();
 
     public abstract void forwards();
 
@@ -61,7 +61,7 @@ public abstract class RobotInterface {
 
     public abstract boolean fastest_path_steps(); //number of steps for fastest path
 
-	public abstract void setSpeed(float robot_steps_per_second);
+    public abstract void setSpeed(float robot_steps_per_second);
 
     public abstract boolean get_fastest_instruction(Stack<Node> fast);
 
@@ -433,7 +433,7 @@ public abstract class RobotInterface {
 		graphics.setColor(Color.RED);
 		x_g = 10 + (x - 1) * Map.size_of_square;
 		y_g = 10 + (y - 1) * Map.size_of_square;
-		graphics.fillArc(x_g, y_g, radius, radius, 0, 360);
+		graphics.fillRect(x_g, y_g, 30, 30); //fill rect
 
 		graphics.setColor(Color.BLUE);
 
@@ -449,7 +449,7 @@ public abstract class RobotInterface {
 		else if (face_dir == Facing.RIGHT)
 			dir_offsetX = 38;
 
-		graphics.fillArc(x_g + 30 + dir_offsetX, y_g + 30 + dir_offsetY, 20, 20, 0, 360);
+		graphics.fillRect(x_g + 30 + dir_offsetX, y_g + 30 + dir_offsetY, 30, 30);
 	}
 
 	public abstract boolean retrieve_reset_wanted();
