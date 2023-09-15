@@ -237,7 +237,7 @@ public class Sensor {
 
 		// is true after robot hits an obstacle, to prevent further sensing
 		boolean hit_obstacle = false;
-		boolean wall_hit_extra = false;
+		boolean obstacle_hit_extra = false;
 
 		for (int i = 1; i < sense_range + 1; i++) {
 			// make sure it is in the map sense_range and bound
@@ -260,7 +260,7 @@ public class Sensor {
 			if (!hit_obstacle) {
 				hit_obstacle = sense_location(map, new_X, new_Y, i);
 				if (sense_location(map, new_X, new_Y, 0) && i == 1)
-					wall_hit_extra = true;
+					obstacle_hit_extra = true;
 			} else
 				// send a 0 to signify that this is behind a wall
 				sense_location(map, new_X, new_Y, 0);
@@ -268,7 +268,7 @@ public class Sensor {
 
 		// update the map score after sensing
 		map.set_score_type();
-		return wall_hit_extra;
+		return obstacle_hit_extra;
 	}
 
 }
